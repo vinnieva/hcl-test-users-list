@@ -1,0 +1,46 @@
+<div class="users">
+  <div class="control-panel">
+    <form>
+      <label class="select"
+        >Select column to filter:
+        <select [formControl]="columnNameControl">
+          <option *ngFor="let opt of options" [value]="opt.value">
+            {{ opt.text }}
+          </option>
+        </select>
+      </label>
+      <label class="input"
+        >Enter filter keywords:
+        <input
+          type="text"
+          [formControl]="searchControl"
+          placeholder="filter keywords go here..."
+        />
+      </label>
+    </form>
+  </div>
+  <div class="users-list-wrapper">
+    <table class="users-list">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>User Name</th>
+          <th>E-mail</th>
+          <th>Phone</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="users$ | async as users">
+          <tr *ngFor="let user of users; trackBy: userById">
+            <td>{{ user.name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.website }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
